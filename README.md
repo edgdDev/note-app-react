@@ -24,3 +24,7 @@ This is a front end application developed with React and some other technologies
 - As a user, I want to list my archived notes
 - As a user, I want to be able to add/remove categories to notes
 - As a user, I want to be able to filter notes by category
+
+### User credentials
+user: admin
+pass: envolvers123
