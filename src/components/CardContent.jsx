@@ -93,7 +93,7 @@ export const CardContent = ({ notes, dispatch, setShow, setSkip, setNote, isFilt
                                 <h4>Are you sure you want to delete this note?</h4>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant='success' onClick={() => dispatch(removeNote({ title: item.title }))}>Yes</Button>
+                                <Button variant='success' onClick={() => dispatch(removeNote({ id: item.id }))}>Yes</Button>
                                 <Button variant='danger' onClick={() => setModal(false)}>No</Button>
                             </Modal.Footer>
                         </Modal>
