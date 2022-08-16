@@ -1,20 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-  value: 10,
-}
-
 export const noteSlice = createSlice({
   name: 'note',
-  initialState,
+  initialState: [],
   reducers: {
-    increment: (state) => {
-
-      state.value += 1
+    saveNote: (state, action) => {
+      state.push(action.payload)
     },
+    removeNote: (state, action) => {
+      return state.filter(item => item.title !== action.payload.title)
+    },
+    updateNote: (_, action) => {
+      return action.payload      
+    },
+    archiveNote: (_, action) => {
+      return action.payload
+    }
   },
 })
 
 
-export const { increment } = noteSlice.actions
-
+export const { saveNote, removeNote, updateNote, archiveNote } = noteSlice.actions
