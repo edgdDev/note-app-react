@@ -22,7 +22,7 @@ export const CardContent = ({ notes, dispatch, setShow, setSkip, setNote, isFilt
         dispatch(archiveNote(newArray))
     }
 
-    const [showModal, setModal] = useState(false);
+    const [showModal, setModal] = useState({ status: false, item: {} });
 
   return (
     <main className='d-flex flex-nowrap animate__fadeIn'>
@@ -51,7 +51,7 @@ export const CardContent = ({ notes, dispatch, setShow, setSkip, setNote, isFilt
                             {/* Edit */}
                             <i class="fa-regular fa-pen-to-square"></i>
                         </Button>
-                        <Button variant='danger' onClick={() => dispatch(removeNote({ title: item.title }))}>
+                        <Button variant='danger' onClick={() => setModal({ status: true, item: item })}>
                             {/* Remove */}
                             <i class="fa-solid fa-trash"></i>
                         </Button>
@@ -83,25 +83,28 @@ export const CardContent = ({ notes, dispatch, setShow, setSkip, setNote, isFilt
                             {/* Edit */}
                             <i class="fa-regular fa-pen-to-square"></i>
                         </Button>
-                        <Button variant='danger' onClick={() => setModal(true)}>
+                        <Button variant='danger' onClick={() => setModal({ status: true, item: item })}>
                             {/* Remove */}
                             <i class="fa-solid fa-trash"></i>
                         </Button>
 
-                        <Modal show={ showModal }>
-                            <Modal.Body>
-                                <h4>Are you sure you want to delete this note?</h4>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button variant='success' onClick={() => dispatch(removeNote({ id: item.id }))}>Yes</Button>
-                                <Button variant='danger' onClick={() => setModal(false)}>No</Button>
-                            </Modal.Footer>
-                        </Modal>
 
                     </Card.Footer>
                 </Card>
             )) 
         }
+            <Modal show={ showModal.status }>
+                <Modal.Body>
+                    <h4>Are you sure you want to delete this note?</h4>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant='success' onClick={() => {
+                        dispatch(removeNote({ id: showModal.item.id }))
+                        setModal({ status: false, item: {} })
+                    }}>Yes</Button>
+                    <Button variant='danger' onClick={() => setModal({ status: false, item: {} })}>No</Button>
+                </Modal.Footer>
+            </Modal>
     </main>
   )
 }
